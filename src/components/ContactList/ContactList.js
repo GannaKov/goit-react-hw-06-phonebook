@@ -13,6 +13,7 @@ import {
 } from './ContactList.styled';
 
 const getVisibleContacts = (contacts, filter) => {
+  console.log('cont', contacts);
 
   const normalizedFilter = filter.toLowerCase();
 
@@ -26,29 +27,27 @@ export function ContactsList() {
 
   // const contacts = useSelector(state => state.contacts);
 
-  const contacts = useSelector(getContacts);
+  const { contacts } = useSelector(getContacts);
+  console.log('list', contacts);
   const filter = useSelector(getFilter);
   const handleDeleteContact = contactId => dispatch(deleteContact(contactId));
   // const filter = useSelector(state => state.filter);
   const visibleContacts = getVisibleContacts(contacts, filter);
 
   return (
-   
     <ContactList>
-    {visibleContacts.map(contact => (
-      <ContactListItem key={contact.id}>
-        <ContactItem contact={contact} />
-        <FiltrSubmitBtn
-          type="button"
-          onClick={() => handleDeleteContact(contact.id)}
-        >
-          Удалить
-        </FiltrSubmitBtn>
-      </ContactListItem>
-    ))}
-  </ContactList>
-    
-    
+      {visibleContacts.map(contact => (
+        <ContactListItem key={contact.id}>
+          <ContactItem contact={contact} />
+          <FiltrSubmitBtn
+            type="button"
+            onClick={() => handleDeleteContact(contact.id)}
+          >
+            Удалить
+          </FiltrSubmitBtn>
+        </ContactListItem>
+      ))}
+    </ContactList>
   );
 }
 ContactsList.propTypes = {

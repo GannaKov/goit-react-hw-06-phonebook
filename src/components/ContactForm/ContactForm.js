@@ -13,7 +13,8 @@ import {
 import PropTypes from 'prop-types';
 
 export const ContactForm = () => {
-  const contacts = useSelector(getContacts);
+  const {contacts} = useSelector(getContacts);
+  console.log("form",contacts)
   const dispatch = useDispatch();
 
   const [name, setName] = useState('');
@@ -35,6 +36,8 @@ export const ContactForm = () => {
   };
   const handleSubmit = evt => {
     evt.preventDefault();
+    
+    
     if (contacts.length > 0 && contacts.find(item => item.name === name)) {
       alert(`${name} is already in contacts `);
       reset();
