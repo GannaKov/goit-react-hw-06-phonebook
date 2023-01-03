@@ -10,11 +10,10 @@ import {
   ModalSubmitBtn,
   FormLabel,
 } from 'components/ContactForm/ContactForm.styled';
-import PropTypes from 'prop-types';
 
 export const ContactForm = () => {
-  const {contacts} = useSelector(getContacts);
-  console.log("form",contacts)
+  const { contacts } = useSelector(getContacts);
+ 
   const dispatch = useDispatch();
 
   const [name, setName] = useState('');
@@ -36,15 +35,13 @@ export const ContactForm = () => {
   };
   const handleSubmit = evt => {
     evt.preventDefault();
-    
-    
+
     if (contacts.length > 0 && contacts.find(item => item.name === name)) {
       alert(`${name} is already in contacts `);
       reset();
       return;
     }
-     
-   
+
     dispatch(addContact(name, number));
     reset();
   };
@@ -81,9 +78,4 @@ export const ContactForm = () => {
       <ModalSubmitBtn type="submit">Add Conract</ModalSubmitBtn>
     </Form>
   );
-};
-
-ContactForm.propTypes = {
-  onSubm: PropTypes.func,
-  handleChange: PropTypes.func,
 };

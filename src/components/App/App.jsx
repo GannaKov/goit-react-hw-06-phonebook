@@ -11,7 +11,6 @@ import { Title } from './App.styled';
 export const App = () => {
   // const contacts = useSelector(state => state.contacts);
   const { contacts } = useSelector(getContacts);
-  console.log(contacts);
 
   return (
     <div
