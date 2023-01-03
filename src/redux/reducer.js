@@ -19,10 +19,16 @@ export const contactsReducer = createReducer(contactsInitialState, {
     return state.filter(contact => contact.id !== action.payload);
   },
 });
+
 const filtersInitialState = () => '';
 export const filtersReducer = createReducer(filtersInitialState, {
   [putFilter]: (state, action) => action.payload,
 });
+
+//   const deleteContact = contactId => {
+
+//    setContacts(state => state.filter(contact => contact.id !== contactId))}
+
 // export const contactsReducer = (state = contactsInitialState, action) => {
 //   switch (action.type) {
 //     case addContact.type:
