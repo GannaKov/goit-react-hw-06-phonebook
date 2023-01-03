@@ -15,4 +15,5 @@ export const deleteContact = createAction('contact/deleteContact');
 
 export const putFilter = createAction('filters/putFilter', value => {
   return { payload: value };
+ 
 });
