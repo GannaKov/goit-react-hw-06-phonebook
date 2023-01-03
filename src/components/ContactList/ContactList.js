@@ -1,24 +1,48 @@
 import React from 'react';
- import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { getContacts, getFilter } from 'redux/selectors';
 import { ContactItem } from 'components/ContactItem/ContactItem';
-import { ContactList, ContactListItem ,FiltrSubmitBtn } from './ContactList.styled';
+import {
+  ContactList,
+  ContactListItem,
+  FiltrSubmitBtn,
+} from './ContactList.styled';
 
-export function ContactsList({ contacts, onDeleteContact }) {
+const getVisibleContacts = (contacts, filter) => {
+  const normalizedFilter = filter.toLowerCase();
+
+  return contacts.filter(contact =>
+    contact.name.toLowerCase().includes(normalizedFilter)
+  );
+};
+
+export function ContactsList() {
+  // const contacts = useSelector(state => state.contacts);
+
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
+  // const filter = useSelector(state => state.filter);
+  const visibleContacts = getVisibleContacts(contacts, filter);
+
   return (
     <ContactList>
-      {contacts.map(contact => (
+      {visibleContacts.map(contact => (
         <ContactListItem key={contact.id}>
           <ContactItem contact={contact} />
-          <FiltrSubmitBtn type="button" onClick={() => onDeleteContact(contact.id)}>
-            Удалить
-          </FiltrSubmitBtn>
+          <FiltrSubmitBtn type="button">Удалить</FiltrSubmitBtn>
         </ContactListItem>
       ))}
     </ContactList>
   );
 }
 ContactsList.propTypes = {
-  contacts: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string.isRequired,
-     })),
-    onDelete: PropTypes.func,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({ id: PropTypes.string.isRequired })
+  ),
+  onDelete: PropTypes.func,
 };
+// {/* <FiltrSubmitBtn
+//   type="button"
+//   onClick={() => onDeleteContact(contact.id)}
+// ></FiltrSubmitBtn>; */}

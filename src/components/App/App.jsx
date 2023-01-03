@@ -1,5 +1,5 @@
-import { nanoid } from 'nanoid';
-import { useState} from 'react'; 
+import { useSelector } from 'react-redux';
+import { getContacts } from 'redux/selectors';
 import { GlobalStyle } from 'CreateGlobalStyle';
 import { ContainerWrap } from 'components/Section/Section';
 import { ContactForm } from 'components/ContactForm/ContactForm';
@@ -9,79 +9,53 @@ import { Title } from './App.styled';
 import { useLocalStorage } from 'hooks/useLokalStorage';
 
 export const App = () => {
-   const [contacts, setContacts] = useLocalStorage("contacts", null);
-  const [filter, setFilter] = useState(""); 
+  // const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(getContacts);
+  console.log(contacts);
+  //   const [contacts, setContacts] = useLocalStorage("contacts", null);
 
+  //   const addContact = (name, number) => {
 
-  const addContact = (name, number) => {
-    
-    const checkName = contacts
-      .map(contact => contact.name.toLowerCase())
-      .some(contact => contact === name.toLowerCase());
-    if (!checkName) {
-      const newContact = {
-        id: nanoid(),
-        name,
-        number,
-      };
-     
-        setContacts (state=>[newContact, ...state]);
-    } else {
-      window.alert(`${name} is already in contacts `);
-    }
-  };
-  const deleteContact = contactId => {
-   
-   setContacts(state => state.filter(contact => contact.id !== contactId))}
-  
-  
- const changeFilter = e => {
-  setFilter(e.currentTarget.value );
-  };
+  //     const checkName = contacts
+  //       .map(contact => contact.name.toLowerCase())
+  //       .some(contact => contact === name.toLowerCase());
+  //     if (!checkName) {
+  //       const newContact = {
+  //         id: nanoid(),
+  //         name,
+  //         number,
+  //       };
 
-  const getVisibleContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
+  //         setContacts (state=>[newContact, ...state]);
+  //     } else {
+  //       window.alert(`${name} is already in contacts `);
+  //     }
+  //   };
 
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
-    );
-  }; 
+  //   const deleteContact = contactId => {
 
-  const visibleContacts = getVisibleContacts();
-      return (
-      <div 
-style={{
+  //    setContacts(state => state.filter(contact => contact.id !== contactId))}
+
+  return (
+    <div
+      style={{
         height: '100vh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         color: '#010101',
-      }}> 
+      }}
+    >
+      <GlobalStyle />
+      <Title>Phonebook</Title>
 
-       <GlobalStyle />
-        <Title>Phonebook</Title>
-
-        <ContainerWrap>
-        <ContactForm
-        onSubm={addContact}
-      
-      />
-    </ContainerWrap>
+      <ContainerWrap>
+        <ContactForm />
+      </ContainerWrap>
       <ContainerWrap title="Contacts">
-      <Filter value={filter} onChange={changeFilter} />
-      {contacts.length > 0 && (
-        <ContactsList
-          contacts={visibleContacts}
-         onDeleteContact={deleteContact}
-        />
-      )}
-    </ContainerWrap>
-
-      </div> 
-      
-     
-    );
-  } 
-
-
-
+        <Filter />
+        {contacts.length > 0 && <ContactsList />}
+      </ContainerWrap>
+    </div>
+  );
+};
