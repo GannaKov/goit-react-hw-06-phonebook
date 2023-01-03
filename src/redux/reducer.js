@@ -5,7 +5,14 @@ const contactsInitialState = [];
 
 export const contactsReducer = createReducer(contactsInitialState, {
   [addContact]: (state, action) => {
-    return [...state, action.payload];
+    const checkName = state
+      .map(contact => contact.name.toLowerCase())
+      .some(contact => contact === action.payload.name.toLowerCase());
+    if (!checkName) {
+      return [...state, action.payload];
+    } else {
+      window.alert(`${action.payload.name} is already in contacts `);
+    }
   },
 
   [deleteContact]: (state, action) => {
