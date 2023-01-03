@@ -33,19 +33,22 @@ export function ContactsList() {
   const visibleContacts = getVisibleContacts(contacts, filter);
 
   return (
+   
     <ContactList>
-      {visibleContacts.map(contact => (
-        <ContactListItem key={contact.id}>
-          <ContactItem contact={contact} />
-          <FiltrSubmitBtn
-            type="button"
-            onClick={() => handleDeleteContact(contact.id)}
-          >
-            Удалить
-          </FiltrSubmitBtn>
-        </ContactListItem>
-      ))}
-    </ContactList>
+    {visibleContacts.map(contact => (
+      <ContactListItem key={contact.id}>
+        <ContactItem contact={contact} />
+        <FiltrSubmitBtn
+          type="button"
+          onClick={() => handleDeleteContact(contact.id)}
+        >
+          Удалить
+        </FiltrSubmitBtn>
+      </ContactListItem>
+    ))}
+  </ContactList>
+    
+    
   );
 }
 ContactsList.propTypes = {
