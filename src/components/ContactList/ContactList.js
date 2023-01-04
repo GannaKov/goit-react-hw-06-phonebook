@@ -12,10 +12,7 @@ import {
 } from './ContactList.styled';
 
 const getVisibleContacts = (contacts, filter) => {
-
-
   const normalizedFilter = filter.toLowerCase();
-
   return contacts.filter(contact =>
     contact.name.toLowerCase().includes(normalizedFilter)
   );
@@ -24,13 +21,12 @@ const getVisibleContacts = (contacts, filter) => {
 export function ContactsList() {
   const dispatch = useDispatch();
 
-  // const contacts = useSelector(state => state.contacts);
-
   const { contacts } = useSelector(getContacts);
- 
-  const filter = useSelector(getFilter);
+
+  // const contacts = useSelector(state => state.contacts);
   const handleDeleteContact = contactId => dispatch(deleteContact(contactId));
   // const filter = useSelector(state => state.filter);
+  const filter = useSelector(getFilter);
   const visibleContacts = getVisibleContacts(contacts, filter);
 
   return (
@@ -49,5 +45,3 @@ export function ContactsList() {
     </ContactList>
   );
 }
-
-

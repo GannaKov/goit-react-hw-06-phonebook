@@ -11,14 +11,14 @@
 // //       .map(contact => contact.name.toLowerCase())
 // //       .some(contact => contact === action.payload.name.toLowerCase());
 // //     if (!checkName) {
-// //       return [...state, action.payload];
+// //       return [...state, action.payload];//
 // //     } else {
 // //       window.alert(`${action.payload.name} is already in contacts `);
 // //     }
 // //   },
 
 // //   [deleteContact]: (state, action) => {
-// //     return state.filter(contact => contact.id !== action.payload);
+// //     return state.filter(contact => contact.id !== action.payload); //
 // //   },
 // // });
 // //-----------------------------
@@ -46,14 +46,14 @@
 
 // //First Version
 // // export const filtersReducer = createReducer(filtersInitialState, {
-// //   [putFilter]: (state, action) => 
-// //   {  return action.payload}
+// //   [putFilter]: (state, action) =>
+// //   {  return action.payload} //without return???
 
 // // });
 // //--------------------
 // // Second Version
 // export const filtersReducer = createReducer(filtersInitialState, {
-//   [putFilter]: (state, action) => 
+//   [putFilter]: (state, action) =>
 //     action.payload
 //  //  [putFilter]: (state, action) => (state = action.payload),
 // });

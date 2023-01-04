@@ -13,7 +13,7 @@ import {
 
 export const ContactForm = () => {
   const { contacts } = useSelector(getContacts);
- 
+  //const value=useSelector(state=>state.myValue) - from lesson
   const dispatch = useDispatch();
 
   const [name, setName] = useState('');
